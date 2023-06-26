@@ -4,16 +4,29 @@ const userRouter = require('./routers/user');
 const projectRouter = require('./routers/project');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
+const jwt = require('jsonwebtoken');
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
-
+const secret = process.env.JWT_SECRET;
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+function authenticateToken(req, res, next) {
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
+	if (token == null) return res.sendStatus(401);
+
+	jwt.verify(token, secret, (err, user) => {
+		console.log(err);
+		if (err) return res.sendStatus(403);
+		// req.user = user;
+		next();
+	});
+}
 
 // Connect to MongoDB Atlas
 mongoose
@@ -34,7 +47,13 @@ app.get('/', (req, res) => {
 
 // Mount routers
 app.use('/users', userRouter);
-app.use('/projects', projectRouter);
+app.use('/projects', authenticateToken, projectRouter);
+app.post('/logout', (req, res) => {
+	// we will be removing token from frontendand that will call this api
+	res.send(
+		'<html><head></head><body style="width:100vw;height:100vh;display:flex;justifyContent:center;alignItems:center"><h1>LOGGED OUT</h1></body></html>'
+	);
+});
 
 // Start the server
 app.listen(port, () => {
