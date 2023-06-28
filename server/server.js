@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 
 // Mount routers
 app.use('/users', userRouter);
-app.use('/projects', authenticateToken, projectRouter);
+app.use('/projects', projectRouter);
 app.post('/logout', (req, res) => {
 	// we will be removing token from frontendand that will call this api
 	res.send(
