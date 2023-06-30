@@ -16,8 +16,22 @@ router.get('/', (req, res) => {
 		});
 });
 
+
+function authenticateToken(req, res, next) {
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
+	if (token == null) return res.sendStatus(401);
+
+	jwt.verify(token, secret, (err, user) => {
+		console.log(err);
+		if (err) return res.sendStatus(403);
+		// req.user = user;
+		next();
+	});
+}
+
 // GET a specific project by ID
-router.get('/:id', (req, res) => {
+router.get('/:id' ,(req, res) => {
 	const projectId = req.params.id;
 	Project.findById(projectId)
 		.then((project) => {
@@ -34,7 +48,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a new project
-router.post('/', (req, res) => {
+router.post('/',authenticateToken, (req, res) => {
 	const { title, description, image, createdBy } = req.body;
 
 	User.findOne({ username: createdBy })
@@ -76,7 +90,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT/update a project by ID
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticateToken,(req, res) => {
 	const projectId = req.params.id;
 	const { title, description, image } = req.body;
 	Project.findByIdAndUpdate(
@@ -98,7 +112,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE a project by ID
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticateToken, (req, res) => {
 	const projectId = req.params.id;
 	Project.findByIdAndDelete(projectId)
 		.then((project) => {
