@@ -1,6 +1,8 @@
 # Project-Hub
+This is blogsite project,where people can share thier projects. Link-> https://projecthub-lyart.vercel.app/
+This repository has 2 nested repositories one frontend and another for backend
 
-This is blogsite project,where people can share thier projects
 
 ## Note:
-Client folder is repository link, here it is-> https://github.com/gur26001/ProjectHub-Frontend.git
+Click frontend submodule above,to see the frontend code OR click this link for frontend code-> https://github.com/gur26001/ProjectHub-Frontend.git
+Click,backend submodule above, to see code of backend code OR click this link for backend code-> https://github.com/gur26001/ProjectHub-Backend
