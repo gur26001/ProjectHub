@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/gur26001/ProjectHub-Backend.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/gur26001/ProjectHub-Frontend.git
