@@ -1,0 +1,3 @@
+[submodule "ProjectHub-Frontend"]
+	path = ProjectHub-Frontend
+	url = https://github.com/gur26001/ProjectHub-Frontend.git
