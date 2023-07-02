@@ -5,5 +5,5 @@ This repository has 2 nested repositories one frontend and another for backend
 
 
 ## Note:
-Click <code>frontend</code> submodule above,to see the frontend code OR click this link for frontend code-> https://github.com/gur26001/ProjectHub-Frontend.git. <br>
+Click <code>frontend</code> submodule above,to see the frontend code OR click this link for frontend code-> https://github.com/gur26001/ProjectHub-Frontend <br>
 Click <code> backend </code> submodule above, to see code of backend code OR click this link for backend code-> https://github.com/gur26001/ProjectHub-Backend
